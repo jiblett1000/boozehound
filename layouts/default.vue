@@ -1,59 +1,72 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
-      :mini-variant="miniVariant"
-      :clipped="clipped"
       v-model="drawer"
       fixed
-      app
-    >
+      app>
+
+      <v-toolbar
+        color="primary"
+        dark>
+        <v-toolbar-title class="ml-3 mr-5">Hup&nbsp;<span class="font-weight-light">Bar</span></v-toolbar-title>
+      </v-toolbar>
+
+      <v-toolbar
+        flat
+        class="transparent my-2">
+
+        <v-list>
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg">
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>John Leider</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+
+      <v-divider class="my-3" />
+
       <v-list>
-        <v-list-tile
-          v-for="(item, i) in items"
-          :to="item.to"
-          :key="i"
-          router
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon" />
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
-          </v-list-tile-content>
-        </v-list-tile>
+        <template v-for="(item, i) in items">
+
+          <v-divider
+            v-if="item.divider"
+            :key="i"
+            class="my-3" />
+
+          <v-list-tile
+            v-else
+            :to="item.to"
+            :key="i"
+            router
+            exact>
+            <v-list-tile-action>
+              <v-icon v-html="item.icon" />
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="item.title" />
+            </v-list-tile-content>
+          </v-list-tile>
+        </template>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
-      :clipped-left="clipped"
+      color="primary lighten-1"
+      dark
       fixed
-      app
-    >
+      app>
       <v-toolbar-side-icon @click="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'" />
+      <v-toolbar-title {{$to(page-title)}} />
+      <v-spacer />
+      <v-btn icon>
+        <v-icon>search</v-icon>
       </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"/>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
+      <v-btn icon>
+        <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
@@ -61,46 +74,35 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      :right="right"
-      v-model="rightDrawer"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; 2017</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
-      }
+import { mapState } from 'vuex';
+
+export default {
+  data() {
+    return {
+      drawer: null,
+      items: [
+        { icon: 'dashboard', title: 'Dashboard', to: '/dashboard' },
+        { icon: 'book', title: 'Recipes', to: '/recipes' },
+        { icon: 'ballot', title: 'Inventory', to: '/inventory' },
+        { icon: 'view_list', title: 'Orders', to: '/orders' },
+        { icon: 'tablet_android', title: 'POS Items', to: '/pos-items' },
+        { icon: 'trending_up', title: 'Reports', to: '/reports' },
+        { divider: true },
+        { icon: 'settings', title: 'Settings', to: '/settings' },
+        { icon: 'help', title: 'Help', to: '/help' },
+      ],
+      title: 'Boozehound',
     }
+  },
+  computed: {
+    ...mapState({
+      pagetitle: state => state.pageTitle,
+    })
   }
+}
+
 </script>
