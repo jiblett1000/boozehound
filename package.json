@@ -2,6 +2,7 @@
   "name": "boozehound",
   "version": "1.0.0",
   "description": "Tools for bar management",
+  "homepage": "https://github.com/jiblett1000/boozehound#readme",
   "author": "Christian Burkhart",
   "private": true,
   "scripts": {

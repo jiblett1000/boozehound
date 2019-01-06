@@ -1,16 +1,13 @@
 <template>
-
-  <h1>Home</h1>
-
+  <v-layout>
+    <v-flex/>
+  </v-layout>
 </template>
 
 <script>
 
 export default {
   name: 'Dashboard',
-  metaInfo: {
-    title: 'Dashboard',
-  }
 };
 
 </script>

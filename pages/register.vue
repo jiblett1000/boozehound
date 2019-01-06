@@ -1,9 +1,11 @@
 <template>
-  <h1>Register</h1>
+  <v-layout>
+    <v-flex/>
+  </v-layout>
 </template>
 
 <script>
 export default {
-
+  layout: 'auth',
 };
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <h1>Recipes</h1>
+  <v-layout>
+    <v-flex/>
+  </v-layout>
 </template>
 
 <script>

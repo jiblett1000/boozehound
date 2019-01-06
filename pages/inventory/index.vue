@@ -1,5 +1,7 @@
 <template>
-  <h1>POS Items</h1>
+  <v-layout>
+    <v-flex/>
+  </v-layout>
 </template>
 
 <script>

@@ -31,7 +31,7 @@
       <v-divider class="my-3" />
 
       <v-list>
-        <template v-for="(item, i) in items">
+        <template v-for="(item, i) in menu">
 
           <v-divider
             v-if="item.divider"
@@ -40,7 +40,7 @@
 
           <v-list-tile
             v-else
-            :to="item.to"
+            :to="item.href"
             :key="i"
             router
             exact>
@@ -60,7 +60,7 @@
       fixed
       app>
       <v-toolbar-side-icon @click="drawer = !drawer" />
-      <v-toolbar-title {{$to(page-title)}} />
+      <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer />
       <v-btn icon>
         <v-icon>search</v-icon>
@@ -70,7 +70,9 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <v-container>
+      <v-container
+        fluid
+        pa-0>
         <nuxt />
       </v-container>
     </v-content>
@@ -84,25 +86,16 @@ export default {
   data() {
     return {
       drawer: null,
-      items: [
-        { icon: 'dashboard', title: 'Dashboard', to: '/dashboard' },
-        { icon: 'book', title: 'Recipes', to: '/recipes' },
-        { icon: 'ballot', title: 'Inventory', to: '/inventory' },
-        { icon: 'view_list', title: 'Orders', to: '/orders' },
-        { icon: 'tablet_android', title: 'POS Items', to: '/pos-items' },
-        { icon: 'trending_up', title: 'Reports', to: '/reports' },
-        { divider: true },
-        { icon: 'settings', title: 'Settings', to: '/settings' },
-        { icon: 'help', title: 'Help', to: '/help' },
-      ],
-      title: 'Boozehound',
     }
   },
+  middleware: 'checkPageTitle',
+
   computed: {
     ...mapState({
-      pagetitle: state => state.pageTitle,
+      pageTitle: state => state.pageTitle,
+      menu: state => state.menu,
     })
-  }
+  },
 }
 
 </script>
