@@ -8,7 +8,7 @@
       <v-toolbar
         color="primary"
         dark>
-        <v-toolbar-title class="ml-3 mr-5">Hup&nbsp;<span class="font-weight-light">Bar</span></v-toolbar-title>
+        <v-toolbar-title class="ml-3 mr-5">Boozehound</v-toolbar-title>
       </v-toolbar>
 
       <v-toolbar
@@ -18,11 +18,11 @@
         <v-list>
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img src="https://randomuser.me/api/portraits/men/85.jpg">
+              <img src="http://i.pravatar.cc/150?img=2">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>John Leider</v-list-tile-title>
+              <v-list-tile-title>{{ fullName }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -86,6 +86,7 @@ export default {
   data() {
     return {
       drawer: null,
+      fullName: 'Christian Burkhart',
     }
   },
   middleware: 'checkPageTitle',

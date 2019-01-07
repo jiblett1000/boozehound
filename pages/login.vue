@@ -4,32 +4,37 @@
     justify-center>
     <v-flex 
       xs12 
-      sm8 
-      md4>
+      sm6
+      md3
+      text-xs-center>
       <v-card 
         flat
         color="primary"
         dark>
-        <v-card-title>
-          <v-flex 
-            xs12 
-            class="text-xs-center display-1 font-weight-bold text-uppercase">
-            Boozehound
-          </v-flex>
-        </v-card-title>
-        <v-card-text>
+        <v-avatar
+          size="96">
+          <img src="http://i.pravatar.cc/300?img=2">
+        </v-avatar>
+        <v-card-text
+          class="mt-2 title text-uppercase">
+          <p>Welcome back, {{ userName }}!</p>
+        </v-card-text>
+        <v-card-text
+          class="px-2">
           <v-form>
             <v-text-field 
-              prepend-icon="person" 
-              name="login" 
-              label="Login" 
-              type="text"/>
+              prepend-inner-icon="person" 
+              name="email" 
+              label="Email" 
+              type="email"
+              box/>
             <v-text-field 
               id="password" 
-              prepend-icon="lock" 
+              prepend-inner-icon="lock" 
               name="password" 
               label="Password" 
-              type="password"/>
+              type="password"
+              box/>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -40,6 +45,15 @@
             Login
           </v-btn>
         </v-card-actions>
+        <v-card-text
+          class="grey--text text--lighten-1">
+          <p>Not registered?
+            <router-link 
+              class="secondary--text" 
+              to="/register">Sign up
+            </router-link> for an account.
+          </p>
+        </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
@@ -48,6 +62,11 @@
 <script>
 export default {
   layout: 'auth',
+  data() {
+    return {
+      userName: 'Christian',
+    }
+  }
 };
 </script>
 

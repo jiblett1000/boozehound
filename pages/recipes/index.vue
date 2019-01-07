@@ -7,10 +7,8 @@
 
           <v-list-tile
             :key="item.title"
-            avatar
-          >
-            <v-list-tile-avatar 
-              v-if="item.avatar">
+            avatar>
+            <v-list-tile-avatar>
               <img :src="item.avatar">
             </v-list-tile-avatar>
 
@@ -26,6 +24,7 @@
     </v-flex>
     <v-fab-transition>
       <v-btn
+        :class="fabVisible"
         color="secondary"
         fixed
         large
@@ -46,61 +45,64 @@
         fabVisible: true,
         items: [
           {
-            title: 'Brunch this weekend?',
+            avatar: 'https://api.adorable.io/avatars/285/abott@adorable.png',
+            title: 'Old Fashioned',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+            avatar: 'http://i.pravatar.cc/150?img=3',
+            title: 'Paloma',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-            title: 'Oui oui',
+            avatar: 'http://i.pravatar.cc/150?img=45',
+            title: 'Tommy\'s Margarita',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            title: 'Brunch this weekend?',
+            avatar: 'http://i.pravatar.cc/150?img=34',
+            title: 'Grasshopper',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+            avatar: 'http://i.pravatar.cc/150?img=35',
+            title: 'Americano',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-            title: 'Oui oui',
+            avatar: 'http://i.pravatar.cc/150?img=8',
+            title: 'Aperol Spritz',
           },
           {
-            title: 'Brunch this weekend?',
+            avatar: 'https://api.adorable.io/avatars/285/abott@adorable.png',
+            title: 'French 75',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+            avatar: 'http://i.pravatar.cc/150?img=5',
+            title: 'Jack Rose',
+          },
+          {            
+            avatar: 'https://api.adorable.io/avatars/285/abott@adorable.png',
+            title: 'Mojito',
           },
           {
-            title: 'Oui oui',
+            avatar: 'http://i.pravatar.cc/150?img=12',
+            title: 'Negroni',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            title: 'Brunch this weekend?',
+            avatar: 'http://i.pravatar.cc/150?img=13',
+            title: 'Sherry Cobbler',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+            avatar: 'http://i.pravatar.cc/150?img=50',
+            title: 'Sazerac',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-            title: 'Oui oui',
+            avatar: 'http://i.pravatar.cc/150?img=46',
+            title: 'Singapore Sling',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            title: 'Brunch this weekend?',
+            avatar: 'http://i.pravatar.cc/150?img=64',
+            title: 'Pisco Sour',
           },
           {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-          },
-          {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-            title: 'Oui oui',
+            avatar: 'http://i.pravatar.cc/150?img=5',
+            title: 'Paper Plane',
           },
         ]
       }
