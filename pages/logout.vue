@@ -20,7 +20,7 @@
           <p>
             <router-link 
               to="/login"
-              class="secondary--text">Login
+              class="secondary--text">Log in
             </router-link>
             again.</p>
         </v-card-text>
