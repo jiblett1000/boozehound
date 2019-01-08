@@ -3,7 +3,7 @@
     v-scroll="fabHide">
     <v-flex>
       <v-list>
-        <template v-for="(item, index) in items">
+        <template v-for="(item, index) in recipes">
 
           <v-list-tile
             :key="item.title"
@@ -39,11 +39,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
   export default {
+    fetch({store}) {
+      store.dispatch('checkContextMenu', this.menu);
+    },
+    
     data() {
       return {
         fabVisible: true,
-        items: [
+        menu: [
+          { title: 'Sort' },
+          { title: 'Group' },
+          { title: 'Filter' },
+          { title: 'Export' },
+          { title: 'Settings' },
+        ],
+        recipes: [
           {
             avatar: 'https://api.adorable.io/avatars/285/abott@adorable.png',
             title: 'Old Fashioned',
@@ -108,10 +121,16 @@
       }
     },
 
+    computed: {
+      ...mapState({
+        contextMenu: 'contextMenu',
+      })
+    },
+
     methods: {
       fabHide() {
         this.fabVisible = false;
       }
-    }
+    },
   }
 </script>

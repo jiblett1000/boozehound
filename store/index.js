@@ -1,35 +1,21 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import menu from '@/components/menu';
+export const state = () => ({
+  drawer: null,
+  fullName: 'Christian Burkhart',
+  contextMenu: [],
+});
 
-Vue.use(Vuex);
+export const mutations = {     
+  toggleDrawer (state, value) {
+    state.drawer = value;
+  } ,
 
-const store = () => {
-  return new Vuex.Store({
-    state: {
-      menu: menu,
-      pageTitle: 'Home',
-    },
-    mutations: {
-      setMenu (state, data) {
-        state.menu = data
-    },
-      setPageTitle (state, data) {
-        state.pageTitle = data
-    },
+  setContextMenu (state, data) {
+    state.contextMenu = data;
+  },
+};
 
-    },
-    actions: {
-      checkPageTitle ({commit, state}, path) {
-        for (let k in state.menu) {
-          if (state.menu[k].href === path.toLowerCase()) {
-              commit('setPageTitle', state.menu[k].title);
-              break;
-          }
-        }
-      }
-    },
-  })
-}
-
-export default store;
+export const actions = {
+  toggleDrawer ({commit}, data) {
+    commit('toggleDrawer', data)
+  }
+};

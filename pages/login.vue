@@ -13,7 +13,7 @@
         dark>
         <v-avatar
           size="96">
-          <img src="http://i.pravatar.cc/300?img=2">
+          <img src="@/static/gravatar.jpg">
         </v-avatar>
         <v-card-text
           class="mt-2 title text-uppercase">

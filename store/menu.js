@@ -1,4 +1,5 @@
-export default [
+export const state = () => ({
+  main:[
     { 
       href: '/dashboard', 
       title: 'Dashboard', 
@@ -42,4 +43,5 @@ export default [
       title: 'Help', 
       icon: 'help', 
     },
-  ]
+  ],
+});

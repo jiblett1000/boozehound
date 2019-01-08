@@ -8,7 +8,7 @@
       <v-toolbar
         color="primary"
         dark>
-        <v-toolbar-title class="ml-3 mr-5">Boozehound</v-toolbar-title>
+        <v-toolbar-title>Boozehound</v-toolbar-title>
       </v-toolbar>
 
       <v-toolbar
@@ -18,7 +18,7 @@
         <v-list>
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img src="http://i.pravatar.cc/150?img=2">
+              <img src="@/static/gravatar.jpg">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
@@ -31,7 +31,7 @@
       <v-divider class="my-3" />
 
       <v-list>
-        <template v-for="(item, i) in menu">
+        <template v-for="(item, i) in main">
 
           <v-divider
             v-if="item.divider"
@@ -83,19 +83,26 @@
 import { mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-      drawer: null,
-      fullName: 'Christian Burkhart',
-    }
-  },
-  middleware: 'checkPageTitle',
+
+  middleware: 'getPageTitle',
 
   computed: {
     ...mapState({
-      pageTitle: state => state.pageTitle,
-      menu: state => state.menu,
-    })
+      fullName: 'fullName',
+    }),
+    ...mapState('menu', ['main']),
+    ...mapState('pageTitle', ['pageTitle']),
+    ...mapState('drawer', ['drawer']),
+
+    drawer: {
+      get() {
+        return this.$store.state.drawer;
+      },
+      set(drawer) {
+        this.$store.dispatch('toggleDrawer', drawer);
+      }
+    },
+
   },
 }
 
