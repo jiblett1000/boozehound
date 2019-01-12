@@ -40,6 +40,7 @@ import { mapState } from 'vuex';
 
 export default {
   meta: {
+    title: 'Recipes',
     contextMenu: [
       { title: 'Sort' },
       { title: 'Group' },

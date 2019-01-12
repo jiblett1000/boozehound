@@ -7,7 +7,9 @@
 <script>
 
 export default {
-
+  meta: {
+    title: 'Help',
+  }
 };
 
 </script>

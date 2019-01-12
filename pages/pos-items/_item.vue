@@ -7,6 +7,7 @@
 <script>
   export default {
     meta: {
+      title: 'POS Item',
       contextMenu: [
         { title: 'Sort' },
         { title: 'Group' },
