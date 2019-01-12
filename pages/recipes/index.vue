@@ -1,30 +1,27 @@
 <template>
-  <v-layout
-    v-scroll="fabHide">
+  <v-layout>
     <v-flex>
       <v-list>
-        <template v-for="(item, index) in recipes">
+        <template v-for="(recipe, index) in recipes">
 
           <v-list-tile
-            :key="item.title"
+            :key="recipe.title"
             avatar>
             <v-list-tile-avatar>
-              <img :src="item.avatar">
+              <img :src="recipe.avatar">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"/>
+              <v-list-tile-title v-html="recipe.title"/>
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-divider
-            :key="index"/>
+          <v-divider :key="index"/>
         </template>
       </v-list>
     </v-flex>
     <v-fab-transition>
-      <v-btn
-        :class="fabVisible"
+      <v-btn 
         color="secondary"
         fixed
         large

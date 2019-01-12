@@ -27,14 +27,16 @@
               name="email" 
               label="Email" 
               type="email"
-              box/>
+              box
+              color="#fff"/>
             <v-text-field 
               id="password" 
               prepend-inner-icon="lock" 
               name="password" 
               label="Password" 
               type="password"
-              box/>
+              box
+              color="#fff"/>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -69,5 +71,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+input[type=email]:focus {
+  background-color: #fff;
+}
+</style>
 
 

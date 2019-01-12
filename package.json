@@ -1,5 +1,5 @@
 {
-  "name": "boozehound",
+  "name": "Boozehound",
   "version": "1.0.0",
   "description": "Tools for bar management",
   "homepage": "https://github.com/jiblett1000/boozehound#readme",
@@ -18,7 +18,7 @@
     "feathers": "^2.0.3",
     "feathers-configuration": "^0.3.3",
     "nuxt": "^2.0.0",
-    "vuetify": "^1.4.0"
+    "vuetify": "^1.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

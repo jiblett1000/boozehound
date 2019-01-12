@@ -31,7 +31,7 @@
       <v-divider class="my-3" />
 
       <v-list>
-        <template v-for="(item, i) in main">
+        <template v-for="(item, i) in mainMenu">
 
           <v-divider
             v-if="item.divider"
@@ -55,6 +55,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
+      id="navBar"
       color="primary lighten-1"
       dark
       fixed
@@ -62,12 +63,33 @@
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer />
-      <v-btn icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>more_vert</v-icon>
-      </v-btn>
+ 
+      <v-text-field
+        id="navSearch"
+        hide-details
+        prepend-inner-icon="search"
+        single-line
+        solo-inverted
+        clearable
+        flat/>
+
+      <template v-if="contextMenu">
+        <v-menu>
+          <v-btn
+            slot="activator"
+            icon
+          >
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile
+              v-for="(item, index) in contextMenu"
+              :key="index">
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </template>
     </v-toolbar>
     <v-content>
       <v-container
@@ -83,27 +105,39 @@
 import { mapState } from 'vuex';
 
 export default {
+  middleware: [
+    'setContextMenu',
+    'setPageTitle',
+  ],
 
-  middleware: 'getPageTitle',
+  data() {
+    return {
+      searchActive: null,
+    }
+  },
 
   computed: {
-    ...mapState({
-      fullName: 'fullName',
-    }),
-    ...mapState('menu', ['main']),
+    ...mapState(['fullName']),
+    ...mapState('mainMenu', ['mainMenu']),
     ...mapState('pageTitle', ['pageTitle']),
-    ...mapState('drawer', ['drawer']),
+    ...mapState('contextMenu', ['contextMenu']),
 
     drawer: {
       get() {
-        return this.$store.state.drawer;
+        return this.$store.state.drawer.drawer;
       },
       set(drawer) {
-        this.$store.dispatch('toggleDrawer', drawer);
-      }
+        this.$store.dispatch('drawer/toggleDrawer', drawer);
+      },
     },
 
   },
 }
 
 </script>
+
+<style lang="stylus">
+#navBar . {
+  width: auto;
+}
+</style>
