@@ -1,5 +1,5 @@
 export const state = () => ({
-  main:[
+  mainMenu:[
     { 
       href: '/dashboard', 
       title: 'Dashboard', 

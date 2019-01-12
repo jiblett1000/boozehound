@@ -9,8 +9,8 @@ export const mutations = {
 };
 
 export const actions = {
-  get ({commit, rootState}, path) {
-    const menu = rootState.menu.main;
+  set ({commit, rootState}, path) {
+    const menu = rootState.mainMenu.mainMenu;
 
     for (let k in menu) {
       if (menu[k].href === path.toLowerCase()) {

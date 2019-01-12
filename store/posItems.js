@@ -1,8 +1,9 @@
 export const state = () => ({
-  fullName: 'Christian Burkhart',
+  posItems: [],
 });
 
-export const mutations = {     
+export const mutations = {
+
 };
 
 export const actions = {
