@@ -1,5 +1,5 @@
 export const state = () => ({
-  pageTitle: 'Home',
+  pageTitle: '',
 });
 
 export const mutations = {

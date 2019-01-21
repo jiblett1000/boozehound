@@ -64,6 +64,7 @@
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer />
  
+      <!-- 
       <v-text-field
         id="navSearch"
         hide-details
@@ -71,8 +72,12 @@
         single-line
         solo-inverted
         clearable
-        flat/>
-
+        flat
+      />
+      -->
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
       <template v-if="contextMenu">
         <v-menu>
           <v-btn
@@ -130,7 +135,6 @@ export default {
         this.$store.dispatch('drawer/toggleDrawer', drawer);
       },
     },
-
   },
 }
 
