@@ -61,12 +61,67 @@ export const state = () => ({
       title: 'Paper Plane',
     },
   ],
+  recipe: {
+    name: 'Old Fashioned',
+    ingredients: [
+      {
+        name: 'Rye Whiskey',
+        abv: 40,
+        amount: 2,
+        unit: 'fl-oz',
+      },
+      {
+        name: 'Simple Syrup (66°Bx)',
+        abv: 0,
+        amount: .25,
+        unit: 'fl-oz',
+      },
+      {
+        name: 'Angostura Bitters',
+        abv: 40,
+        amount: 0.0125,
+        unit: 'fl-oz',
+      },
+      {
+        name: 'Orange Bitters',
+        abv: 40,
+        amount: 0.0125,
+        unit: 'fl-oz',
+      },
+    ],
+    prepMethods: [
+      'Stir',
+    ],
+    drinkware: null,
+    served: 'On a Big Rock',
+    garnishes: [
+      'Lemon Peel',
+    ],
+    initialVol: null,
+    initialAbv: null,
+    dilution: null,
+    finalVol: null,
+    finalAbv: null,
+    glassFilled: null,
+  }
 });
 
 export const mutations = {
+  setName (state, value) {
+    state.recipe.name = value;
+  },
 
+  setDrinkware (state, value) {
+    state.recipe.drinkware = value;
+  },
 };
 
 export const actions = {
+  setName ({commit}, value) {
+    commit('setName', value);
+  },
 
+  setDrinkware ({commit}, value) {
+    commit('setDrinkware', value);
+  },
 };
