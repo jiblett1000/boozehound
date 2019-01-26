@@ -64,11 +64,20 @@
 <script>
 export default {
   layout: 'auth',
-  data() {
+
+  data () {
     return {
+      title: 'Log In',
       userName: 'Christian',
     }
-  }
+  },
+
+  head () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | Boozehound',
+    }
+  },
 };
 </script>
 

@@ -32,11 +32,20 @@
 <script>
 export default {
   layout: 'auth',
-  data() {
+
+  data () {
     return {
+      title: 'Logged out',
       userName: 'Christian',
     }
-  }
+  },
+
+  head () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | Boozehound',
+    }
+  },
 };
 </script>
 

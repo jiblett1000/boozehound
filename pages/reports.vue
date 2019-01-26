@@ -5,9 +5,22 @@
 </template>
 
 <script>
-  export default {
-    meta: {
-      title: 'Reports',
+export default {
+  data () {
+    return {
+      title: 'Reports'
     }
+  },
+
+  head () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | Boozehound',
+    }
+  },
+
+  meta: {
+    title: 'Reports',
   }
+}
 </script>

@@ -64,7 +64,7 @@ export const state = () => ({
   recipe: {
     name: 'Old Fashioned',
     ingredients: [
-      {
+     {
         name: 'Rye Whiskey',
         abv: 40,
         amount: 2,
@@ -79,21 +79,19 @@ export const state = () => ({
       {
         name: 'Angostura Bitters',
         abv: 40,
-        amount: 0.0125,
-        unit: 'fl-oz',
+        amount: 2,
+        unit: 'Dash',
       },
       {
         name: 'Orange Bitters',
         abv: 40,
-        amount: 0.0125,
-        unit: 'fl-oz',
+        amount: 2,
+        unit: 'Dash',
       },
     ],
-    prepMethods: [
-      'Stir',
-    ],
+    prepMethods: [],
     drinkware: null,
-    served: 'On a Big Rock',
+    served: '',
     garnishes: [
       'Lemon Peel',
     ],
@@ -111,8 +109,16 @@ export const mutations = {
     state.recipe.name = value;
   },
 
+  setPrepMethods (state, value) {
+    state.recipe.prepMethods = value;
+  },
+
   setDrinkware (state, value) {
     state.recipe.drinkware = value;
+  },
+
+  setServed (state, value) {
+    state.recipe.served = value;
   },
 };
 
@@ -121,7 +127,15 @@ export const actions = {
     commit('setName', value);
   },
 
+  setPrepMethods ({commit}, value) {
+    commit('setPrepMethods', value);
+  },
+
   setDrinkware ({commit}, value) {
     commit('setDrinkware', value);
+  },
+
+  setServed ({commit}, value) {
+    commit('setServed', value);
   },
 };

@@ -1,15 +1,15 @@
 export default [
   {
-    name: 'Collins',
-    capacity: 330,
-  },
-  {
     name: 'Beer',
     capacity: 450,
   },
   {
     name: 'Champagne Flute',
     capacity: 285,
+  },
+  {
+    name: 'Collins',
+    capacity: 330,
   },
   {
     name: 'Coupe',

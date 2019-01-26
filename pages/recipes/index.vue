@@ -39,6 +39,18 @@
 import { mapState } from 'vuex';
 
 export default {
+  data () {
+    return {
+      title: 'Recipes'
+    }
+  },
+  head () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | Boozehound',
+    }
+  },
+
   meta: {
     title: 'Recipes',
     contextMenu: [

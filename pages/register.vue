@@ -96,5 +96,19 @@
 <script>
 export default {
   layout: 'auth',
+
+  data () {
+    return {
+      title: 'Register'
+    }
+  },
+
+  head () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | Boozehound',
+    }
+  },
+
 };
 </script>

@@ -5,16 +5,29 @@
 </template>
 
 <script>
-  export default {
-    meta: {
-      title: 'POS Items',
-      contextMenu: [
-        { title: 'Sort' },
-        { title: 'Group' },
-        { title: 'Filter' },
-        { title: 'Export' },
-        { title: 'Settings' },
-      ],
-    },
-  }
+export default {
+  data () {
+    return {
+      title: 'POS Items'
+    }
+  },
+
+  head () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | Boozehound',
+    }
+  },
+
+  meta: {
+    title: 'POS Items',
+    contextMenu: [
+      { title: 'Sort' },
+      { title: 'Group' },
+      { title: 'Filter' },
+      { title: 'Export' },
+      { title: 'Settings' },
+    ],
+  },
+}
 </script>
