@@ -1,5 +1,8 @@
 <template>
   <v-layout>
+    <nav-toolbar 
+      :page-title="title"
+      :context-menu="contextMenu" />
     <v-flex>
       <v-list>
         <template v-for="(recipe, index) in recipes">
@@ -37,11 +40,23 @@
 
 <script>
 import { mapState } from 'vuex';
+import navToolbar from '@/components/navToolbar';
 
 export default {
+  components: {
+    navToolbar,
+  },
+
   data () {
     return {
-      title: 'Recipes'
+      title: 'Recipes',
+      contextMenu: [
+        { title: 'Sort' },
+        { title: 'Group' },
+        { title: 'Filter' },
+        { title: 'Export' },
+        { title: 'Settings', to: '/settings#recipes' },
+      ],
     }
   },
   head () {
@@ -49,17 +64,6 @@ export default {
       title: this.title,
       titleTemplate: '%s | Boozehound',
     }
-  },
-
-  meta: {
-    title: 'Recipes',
-    contextMenu: [
-      { title: 'Sort' },
-      { title: 'Group' },
-      { title: 'Filter' },
-      { title: 'Export' },
-      { title: 'Settings' },
-    ],
   },
   
   computed: {

@@ -1,12 +1,20 @@
 <template>
   <v-layout>
+    <nav-toolbar :page-title="title" />
     <v-flex/>
   </v-layout>
 </template>
 
 <script>
-  export default {
-    meta: {
+import navToolbar from '@/components/navToolbar';
+
+export default {
+  components: {
+    navToolbar,
+  },
+  
+  data() {
+    return {
       title: 'Order #',
       contextMenu: [
         { title: 'Sort' },
@@ -15,6 +23,7 @@
         { title: 'Export' },
         { title: 'Settings' },
       ],
-    },
-  }
+    }
+  },
+}
 </script>

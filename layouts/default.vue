@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <navDrawer />
-    <navToolbar />
+    <nav-drawer />
     <v-content>
       <v-container
         fluid
@@ -14,17 +13,11 @@
 
 <script>
 import navDrawer from '@/components/navDrawer';
-import navToolbar from '@/components/navToolbar';
 
 export default {
-  middleware: [
-    'setContextMenu',
-    'setPageTitle',
-  ],
 
   components: {
     navDrawer,
-    navToolbar,
   },
 }
 

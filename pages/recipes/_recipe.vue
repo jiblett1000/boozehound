@@ -1,8 +1,9 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-layout>
-        <v-flex>
+  <v-container>
+    <v-layout>
+      <nav-toolbar :page-title="title" />
+      <v-flex>
+        <v-form>
           <v-text-field
             v-model="recipeName"
             label="Name"
@@ -10,21 +11,63 @@
             autofocus
             clearable
             box/>
-
           <v-subheader>Ingredients</v-subheader>
-          <v-input      
-            v-for="ingredient in recipe.ingredients" 
-            :key="ingredient.name"
-            append-inner-icon="close"
-            prepend-inner-icon="drag_handle"
-            background-color="white"
-            single-line
-            color="black"
-          >
-            {{ ingredient.name }}
-          </v-input>
-          <v-divider />
+          <v-container class="pa-0">
+            <v-input
+              v-for="ingredient in recipe.ingredients"
+              :key="ingredient.name"
+              append-icon="close"
+              prepend-icon="drag_handle"
+              box
+            >
+              <v-layout
+                row
+                wrap>
+                <v-flex 
+                  xs2
+                  d-inline-flex>
+                  <v-text-field 
+                    label="Amount"
+                    type="number"
+                    class="inputNumber"
+                    single-line
+                  />
+                </v-flex>
 
+                <v-flex 
+                  xs2
+                  d-inline-flex>
+                  <v-select 
+                    :items="ingredientUnits"
+                    label="Unit"
+                    single-line 
+                  />
+                </v-flex>
+
+                <v-flex
+                  xs8
+                  d-inline-flex>
+                  <v-text-field 
+                    label="Ingredient"
+                    single-line>
+                    {{ ingredient.name }}
+                  </v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-input>
+            <v-layout>
+              <v-flex>
+                <v-btn
+                  fab
+                  right
+                  outline
+                  small
+                  @click="addIngredient">
+                  <v-icon>add</v-icon>
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
           <v-subheader>Prep Methods</v-subheader>
           <v-select
             v-model="recipePrepMethods"
@@ -35,7 +78,6 @@
             clearable
           />
 
-          <v-subheader>Drinkware</v-subheader>
           <v-select
             v-model="recipeDrinkware"
             :items="drinkware"
@@ -46,7 +88,6 @@
             clearable
           />
 
-          <v-subheader>Served</v-subheader>
           <v-select
             v-model="recipeServed"
             :items="servingMethods"
@@ -117,17 +158,22 @@
               />
             </template>
           </template>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-form>
+        </v-form>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import convert from 'convert-units';
+import navToolbar from '@/components/navToolbar';
 
 export default {
+  components: {
+    navToolbar,
+  },
+
   data () {
     return {
       title: 'recipeName',
@@ -187,6 +233,10 @@ export default {
       set(recipeName) {
         this.$store.dispatch('recipes/setName', recipeName)
       },
+    },
+
+    ingredientUnits() {
+      return convert().possibilities('volume');
     },
 
     recipePrepMethods: {
@@ -304,10 +354,30 @@ export default {
     },
 
   },
+
+  methods: {
+    addIngredient() {
+
+    },
+  },
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+
+  .v-input__prepend-outer, .v-input__append-outer {
+    padding-top: 15px;
+    
+  }
+
+  .inputNumber input[type='number'] {
+      -moz-appearance: textfield;
+  }
+  .inputNumber input[type=number]::-webkit-outer-spin-button,
+  .inputNumber input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
 
 </style>
 

@@ -5,14 +5,47 @@
     dark
     fixed
     app>
-    <v-toolbar-side-icon @click="drawer = !drawer" />
-    <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
-    <v-spacer />
-    <v-btn icon>
-      <v-icon>search</v-icon>
-    </v-btn>
+    <v-fade-transition hide-on-leave>
+      <v-toolbar-side-icon 
+        v-if="!searchActive"
+        @click="drawer = !drawer" 
+      />
+    </v-fade-transition>
+    <v-fade-transition hide-on-leave>
+      <v-toolbar-title 
+        v-if="!searchActive" 
+        v-text="pageTitle" 
+      />
+    </v-fade-transition>
+    <v-slide-x-reverse-transition hide-on-leave>
+      <v-text-field
+        v-if="searchActive"
+        :autofocus="searchActive"
+        color="white"
+        type="search"
+        clearable
+        hide-details
+        full-width
+        single-line
+        placeholder="Search"
+        prepend-inner-icon="search"
+        @blur="searchActive = false"
+      />
+    </v-slide-x-reverse-transition>
+    <v-spacer v-if="!searchActive"/>
+    <v-fade-transition hide-on-leave>
+      <v-btn 
+        v-if="!searchActive"
+        icon
+        ripple
+        @click="searchActive = !searchActive">
+        <v-icon>search</v-icon>
+      </v-btn>
+    </v-fade-transition>
     <template v-if="contextMenu">
-      <v-menu>
+      <v-menu 
+        bottom 
+        left>
         <v-btn
           slot="activator"
           icon
@@ -22,7 +55,8 @@
         <v-list>
           <v-list-tile
             v-for="(item, index) in contextMenu"
-            :key="index">
+            :key="index"
+            :to="item.to">
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -35,9 +69,26 @@
 import { mapState } from 'vuex';
 
 export default {
+  props: {
+    pageTitle: {
+      type: String,
+      default: null,
+    },
+    contextMenu: {
+      type: Array,
+      default() {
+        return null;
+      }
+    },
+  },
+
+  data() {
+    return {
+      searchActive: false,
+    }
+  },
+
   computed: {
-    ...mapState('pageTitle', ['pageTitle']),
-    ...mapState('contextMenu', ['contextMenu']),
 
     drawer: {
       get() {

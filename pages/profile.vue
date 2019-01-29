@@ -1,11 +1,18 @@
 <template>
   <v-layout>
+    <nav-toolbar :page-title="title" />
     <v-flex/>
   </v-layout>
 </template>
 
 <script>
+import navToolbar from '@/components/navToolbar';
+
 export default {
+  components: {
+    navToolbar,
+  },
+
   data () {
     return {
       title: 'Profile'
@@ -18,9 +25,5 @@ export default {
       titleTemplate: '%s | Boozehound',
     }
   },
-
-  meta: {
-    title: 'Profile',
-  }
 };
 </script>
