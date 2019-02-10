@@ -1,8 +1,10 @@
 <template>
-  <v-container>
-    <v-layout>
-      <nav-toolbar :page-title="title" />
-      <v-flex>
+  <v-layout>
+    <TheToolbar 
+      :page-title="title"
+      :context-menu="contextMenu" />
+    <v-flex>
+      <v-container>
         <v-form>
           <v-text-field
             v-model="recipeName"
@@ -18,6 +20,7 @@
               :key="ingredient.name"
               append-icon="close"
               prepend-icon="drag_handle"
+              class="input-list"
               box
             >
               <v-layout
@@ -80,7 +83,7 @@
 
           <v-select
             v-model="recipeDrinkware"
-            :items="drinkware"
+            :items="drinkwareList"
             label="Drinkware"
             item-text="name"
             box
@@ -100,8 +103,8 @@
           <template v-if="recipe.ingredients">
             <v-subheader>Initial Volume</v-subheader>
             <v-text-field
-              :value="initialVol.toFixed(decimalPlaceAcc)"
-              :suffix="volumeUnits"
+              :value="initialVol.toFixed(decimalPlaceAccuracy)"
+              :suffix="volumeDisplayUnits"
               readonly
               single-line
               box
@@ -109,7 +112,7 @@
 
             <v-subheader>Initial ABV</v-subheader>
             <v-text-field
-              :value="initialAbv.toFixed(decimalPlaceAcc)"
+              :value="initialAbv.toFixed(decimalPlaceAccuracy)"
               suffix="%"
               readonly
               single-line
@@ -118,7 +121,7 @@
 
             <v-subheader>Dilution</v-subheader>
             <v-text-field
-              :value="(dilution * 100).toFixed(decimalPlaceAcc)"
+              :value="(dilution * 100).toFixed(decimalPlaceAccuracy)"
               suffix="%"
               label="Dilution"
               box
@@ -128,8 +131,8 @@
 
             <v-subheader>Final Volume</v-subheader>
             <v-text-field
-              :value="finalVol.toFixed(decimalPlaceAcc)"
-              :suffix="volumeUnits"
+              :value="finalVol.toFixed(decimalPlaceAccuracy)"
+              :suffix="volumeDisplayUnits"
               label="Final Volume"
               box
               single-line
@@ -138,7 +141,7 @@
             
             <v-subheader>Final ABV</v-subheader>
             <v-text-field
-              :value="finalAbv.toFixed(decimalPlaceAcc)"
+              :value="finalAbv.toFixed(decimalPlaceAccuracy)"
               suffix="%"
               label="Final ABV"
               box
@@ -149,7 +152,7 @@
             <template v-if="recipe.drinkware">
               <v-subheader>% of Glass Filled</v-subheader>
               <v-text-field
-                :value="glassFilled.toFixed(decimalPlaceAcc)"
+                :value="glassFilled.toFixed(decimalPlaceAccuracy)"
                 suffix="%"
                 label="% of Glass Filled"
                 box
@@ -159,24 +162,30 @@
             </template>
           </template>
         </v-form>
-      </v-flex>
-    </v-layout>
-  </v-container>
+      </v-container>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import convert from 'convert-units';
-import navToolbar from '@/components/navToolbar';
+import TheToolbar from '@/components/TheToolbar';
 
 export default {
   components: {
-    navToolbar,
+    TheToolbar,
   },
 
   data () {
     return {
-      title: 'recipeName',
+      title: 'Recipe Name',
+      contextMenu: [
+        { title: 'Sort', icon: 'sort' },
+        { title: 'Filter', icon: 'filter_list' },
+        { title: 'Export', icon: 'import_export' },
+        { title: 'Settings', icon: 'settings', to: '/settings#recipes' },
+      ],
       prepMethods: [
         'Stir',
         'Stir on Big Rock',
@@ -209,27 +218,16 @@ export default {
     }
   },
 
-  meta: {
-    title: '',
-    contextMenu: [
-      { title: 'Sort' },
-      { title: 'Group' },
-      { title: 'Filter' },
-      { title: 'Export' },
-      { title: 'Settings' },
-    ],
-  },
-
   computed: {
-    ...mapState('userSettings', ['decimalPlaceAcc']),
-    ...mapState('userSettings', ['volumeUnits']),
-    ...mapState('drinkware', ['drinkware']),
-    ...mapState('recipes', ['recipe']),
+    ...mapState({
+      decimalPlaceAccuracy: state => state.user.settings.decimalPlaceAccuracy,
+      volumeDisplayUnits: state => state.user.settings.volumeDisplayUnits,
+      drinkwareList: state => state.drinkware.list,
+      recipe: state => state.recipes.currentRecipe,
+    }),
 
     recipeName: {
-      get() {
-        return this.$store.state.recipes.recipe.name;
-      },
+      get() { return this.recipe.name;},
       set(recipeName) {
         this.$store.dispatch('recipes/setName', recipeName)
       },
@@ -240,27 +238,20 @@ export default {
     },
 
     recipePrepMethods: {
-      get() {
-        return this.$store.state.recipes.recipe.prepMethods;
-      },
+      get() { return this.recipe.prepMethods; },
       set(recipePrepMethods) {
         this.$store.dispatch('recipes/setPrepMethods', recipePrepMethods)
       },
     },
 
     recipeDrinkware: {
-      get() {
-        return this.$store.state.recipes.recipe.drinkware;
-      },
-      set(recipeDrinkware) {
-        this.$store.dispatch('recipes/setDrinkware', recipeDrinkware)
+      get() { return this.recipe.drinkware; },
+      set(recipeDrinkware) { this.$store.dispatch('recipes/setDrinkware', recipeDrinkware)
       },
     },
 
     recipeServed: {
-      get() {
-        return this.$store.state.recipes.recipe.served;
-      },
+      get() { return this.recipe.served; },
       set(recipeServed) {
         this.$store.dispatch('recipes/setServed', recipeServed)
       },
@@ -270,7 +261,7 @@ export default {
       const vol = this.recipe.ingredients.reduce((sum, ingredient) => {
         const unit = ingredient.unit;
         // declare 'amt' var and convert to common unit.
-        const amt = convert(ingredient.amount).from(unit).to(this.volumeUnits);
+        const amt = convert(ingredient.amount).from(unit).to(this.volumeDisplayUnits);
 
         return sum + amt;
       }, 0);
@@ -283,7 +274,7 @@ export default {
         if (ingredient.abv) {
           const unit = ingredient.unit;
           const abv = ingredient.abv;
-          const amt = convert(ingredient.amount).from(unit).to(this.volumeUnits);
+          const amt = convert(ingredient.amount).from(unit).to(this.volumeDisplayUnits);
 
           return sum + amt * abv;
         }
@@ -325,13 +316,9 @@ export default {
       return this.recipe.prepMethods.reduce((sum, method) => sum + methods[method], 0);
     },
 
-    finalVol() {
-      return this.initialVol * this.dilution + this.initialVol;
-    },
+    finalVol() { return this.initialVol * this.dilution + this.initialVol; },
 
-    finalAbv() {
-      return this.ingredientsAbv / this.finalVol;
-    },
+    finalAbv() { return this.ingredientsAbv / this.finalVol; },
 
     glassFilled() {
       const served = this.recipe.served;
@@ -346,7 +333,7 @@ export default {
         'Slushy': 0,
         'Up': 0,
       };
-      const iceVol = convert(iceVols[served]).from('ml').to(this.volumeUnits);
+      const iceVol = convert(iceVols[served]).from('ml').to(this.volumeDisplayUnits);
       const iceAmt = Math.floor(capacity / iceVol);
       const percent = ((this.finalVol + (iceAmt * iceVol)) / capacity);
 
@@ -365,7 +352,7 @@ export default {
 
 <style lang="stylus">
 
-  .v-input__prepend-outer, .v-input__append-outer {
+  .input-list .v-input__prepend-outer, .v-input__append-outer {
     padding-top: 15px;
     
   }

@@ -5,32 +5,31 @@
     app>
 
     <v-toolbar
+      class="hidden-md-and-down"
       color="primary"
       dark>
       <v-toolbar-title>Boozehound</v-toolbar-title>
     </v-toolbar>
-
-    <v-toolbar
-      flat
-      class="transparent my-2">
-
-      <v-list>
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
-            <img src="@/static/gravatar.jpg">
-          </v-list-tile-avatar>
-
-          <v-list-tile-content>
-            <v-list-tile-title>{{ fullName }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-toolbar>
-
-    <v-divider class="my-3" />
-
+  
     <v-list>
-      <template v-for="(item, i) in mainMenu">
+      <v-list-tile 
+        avatar
+        class="hidden-md-and-up my-3">
+        <v-avatar 
+          size="64">
+          <img src="@/static/gravatar.jpg">
+        </v-avatar>
+      </v-list-tile>
+      <v-list-tile class="hidden-md-and-up">
+        <v-list-tile-content>
+          <v-list-tile-title>{{ fullName }}</v-list-tile-title>
+          <v-list-tile-sub-title>{{ userEmail }}</v-list-tile-sub-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
+      <v-divider class="hidden-md-and-up my-3" />
+
+      <template v-for="(item, i) in TheMenu">
 
         <v-divider
           v-if="item.divider"
@@ -56,12 +55,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      mainMenu:[
+      TheMenu:[
         { 
           href: '/dashboard', 
           title: 'Dashboard', 
@@ -109,7 +108,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['fullName']),
+    ...mapState({
+      userEmail: state => state.user.email,
+    }),
+    ...mapGetters({
+      fullName: 'user/fullName',
+    }),
     
     drawer: {
       get() {

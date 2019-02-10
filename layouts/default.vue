@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <nav-drawer />
+    <TheDrawer />
     <v-content>
       <v-container
         fluid
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import navDrawer from '@/components/navDrawer';
+import TheDrawer from '@/components/TheDrawer';
 
 export default {
 
   components: {
-    navDrawer,
+    TheDrawer,
   },
 }
 

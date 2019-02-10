@@ -16,7 +16,7 @@
           <img src="@/static/gravatar.jpg">
         </v-avatar>
         <v-card-text>
-          <p class="mt-2 title text-uppercase">Goodbye, {{ userName }}!</p>
+          <p class="mt-2 title text-uppercase">Goodbye, {{ userFirstName }}!</p>
           <p>
             <router-link 
               to="/login"
@@ -36,7 +36,7 @@ export default {
   data () {
     return {
       title: 'Logged out',
-      userName: 'Christian',
+      userFirstName: this.$store.state.user.firstName,
     }
   },
 

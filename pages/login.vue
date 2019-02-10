@@ -17,7 +17,7 @@
         </v-avatar>
         <v-card-text
           class="mt-2 title text-uppercase">
-          <p>Welcome back, {{ userName }}!</p>
+          <p>Welcome back, {{ userFirstName }}!</p>
         </v-card-text>
         <v-card-text
           class="px-2">
@@ -68,7 +68,7 @@ export default {
   data () {
     return {
       title: 'Log In',
-      userName: 'Christian',
+      userFirstName: this.$store.state.user.firstName,
     }
   },
 

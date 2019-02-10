@@ -1,6 +1,6 @@
 {
   "name": "Boozehound",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Tools for bar management",
   "homepage": "https://github.com/jiblett1000/boozehound#readme",
   "author": "Christian Burkhart",
@@ -14,19 +14,22 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
     "convert-units": "github:jiblett1000/convert-units#master",
     "cross-env": "^5.2.0",
     "feathers": "^2.0.3",
     "feathers-configuration": "^0.3.3",
-    "nuxt": "^2.4.0",
-    "vuetify": "^1.4.3"
+    "feathers-mongodb": "^4.0.4",
+    "mongodb": "^3.1.13",
+    "nuxt": "^2.4.3",
+    "vuetify": "^1.5.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
-    "eslint": "^5.12.1",
-    "eslint-loader": "^2.0.0",
+    "eslint": "^5.13.0",
+    "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^4.7.1",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.18.10",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }

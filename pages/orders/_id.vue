@@ -1,21 +1,21 @@
 <template>
   <v-layout>
-    <nav-toolbar :page-title="title" />
+    <TheToolbar :page-title="title" />
     <v-flex/>
   </v-layout>
 </template>
 
 <script>
-import navToolbar from '@/components/navToolbar';
+import TheToolbar from '@/components/TheToolbar';
 
 export default {
   components: {
-    navToolbar,
+    TheToolbar,
   },
-
+  
   data() {
     return {
-      title: 'Item Name',
+      title: 'Order #',
       contextMenu: [
         { title: 'Sort' },
         { title: 'Group' },

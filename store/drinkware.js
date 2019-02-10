@@ -1,7 +1,7 @@
-import drinkware from '@/assets/drinkware.js';
+import list from '@/assets/drinkware.js';
 
 export const state = () => ({
-  drinkware,
+  list,
 });
 
 export const mutations = {

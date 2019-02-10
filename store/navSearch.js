@@ -1,15 +1,15 @@
 export const state = () => ({
-  pageTitle: '',
+  navSearch: undefined,
 });
 
 export const mutations = {
   set (state, data) {
-    state.pageTitle = data
+    state.navSearch = data;
   },
 };
 
 export const actions = {
-  set ({commit}, title) {
-      commit('set', title);
+  set ({commit}, data) {
+    commit('set', data);
   },
-};
+}

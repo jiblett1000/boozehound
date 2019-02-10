@@ -1,21 +1,23 @@
 <template>
   <v-layout>
-    <nav-toolbar 
+    <TheToolbar 
       :page-title="title"
-      :context-menu="contextMenu" />
+      :context-menu="contextMenu"/>
     <v-flex>
       <v-list>
-        <template v-for="(recipe, index) in recipes">
+        <template v-for="(recipe, index) in recipesFilteredList">
 
           <v-list-tile
-            :key="recipe.title"
+            :key="recipe.name"
+            to="/recipes/:id"
             avatar>
+
             <v-list-tile-avatar>
-              <img :src="recipe.avatar">
+              <img :src="recipe.image">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title v-html="recipe.title"/>
+              <v-list-tile-title v-html="recipe.name"/>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -30,8 +32,8 @@
         large
         bottom
         right
-        fab
-      >
+        fab>
+
         <v-icon>add</v-icon>
       </v-btn>
     </v-fab-transition>
@@ -40,22 +42,21 @@
 
 <script>
 import { mapState } from 'vuex';
-import navToolbar from '@/components/navToolbar';
+import TheToolbar from '@/components/TheToolbar';
 
 export default {
   components: {
-    navToolbar,
+    TheToolbar,
   },
 
   data () {
     return {
       title: 'Recipes',
       contextMenu: [
-        { title: 'Sort' },
-        { title: 'Group' },
-        { title: 'Filter' },
-        { title: 'Export' },
-        { title: 'Settings', to: '/settings#recipes' },
+        { title: 'Sort', icon: 'sort' },
+        { title: 'Filter', icon: 'filter_list' },
+        { title: 'Export', icon: 'import_export' },
+        { title: 'Settings', icon: 'settings', to: '/settings#recipes' },
       ],
     }
   },
@@ -67,7 +68,24 @@ export default {
   },
   
   computed: {
-    ...mapState('recipes', ['recipes']),
+    ...mapState({
+      recipesList: state => state.recipes.list,
+    }),
+
+    navSearch: {
+      get() {
+        return this.$store.state.navSearch.navSearch;
+      },
+      set(navSearch) {
+        this.$store.dispatch('set', navSearch);
+      },
+    },
+
+    recipesFilteredList() {
+      return this.recipesList.filter(recipe => {
+        return recipe.name.toLowerCase().includes((this.navSearch ? this.navSearch : '').toLowerCase())
+      })
+    },
   },
 }
 </script>

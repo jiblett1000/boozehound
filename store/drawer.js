@@ -3,13 +3,13 @@ export const state = () => ({
 });
 
 export const mutations = {
-  toggleDrawer (state, value) {
-    state.drawer = value;
+  TOGGLE_DRAWER (state, data) {
+    state.drawer = data;
   },
 };
 
 export const actions = {
   toggleDrawer ({commit}, data) {
-    commit('toggleDrawer', data)
+    commit('TOGGLE_DRAWER', data)
   },
 };
