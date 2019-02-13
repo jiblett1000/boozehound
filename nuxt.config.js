@@ -1,8 +1,11 @@
-const pkg = require('./package')
+const pkg = require('./package');
+const path = require('path');
 
 module.exports = {
   mode: 'universal',
-
+  dev: process.env.NODE_ENV !== 'production',
+  rootDir: path.join(__dirname),
+  srcDir: path.join(__dirname, 'src/client'),
   /*
   ** Headers of the page
   */
@@ -62,8 +65,8 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   }
-}
+};

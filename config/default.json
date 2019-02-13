@@ -1,0 +1,9 @@
+{
+  "host": "localhost",
+  "port": 3000,
+  "static": "../src/client/static",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  }
+}

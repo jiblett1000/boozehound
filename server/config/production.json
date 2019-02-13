@@ -1,5 +1,0 @@
-{
-  "host": "with-featherjs-app.feathersjs.com",
-  "port": 80,
-  "mongodb": "mongodb://localhost:27017/boozehound"
-}

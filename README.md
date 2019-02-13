@@ -2,21 +2,55 @@
 
 > Tools for bar management
 
-## Build Setup
+## About
 
-``` bash
-# install dependencies
-$ npm install
+This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## Getting Started
 
-# build for production and launch server
-$ npm run build
-$ npm start
+Getting up and running is as easy as 1, 2, 3.
 
-# generate static project
-$ npm run generate
+1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+2. Install your dependencies
+
+    ```
+    cd path/to/boozehound; npm install
+    ```
+
+3. Start your app
+
+    ```
+    npm start
+    ```
+
+## Testing
+
+Simply run `npm test` and all your tests in the `test/` directory will be run.
+
+## Scaffolding
+
+Feathers has a powerful command line interface. Here are a few things it can do:
+
+```
+$ npm install -g @feathersjs/cli          # Install Feathers CLI
+
+$ feathers generate service               # Generate a new Service
+$ feathers generate hook                  # Generate a new Hook
+$ feathers help                           # Show all commands
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Help
+
+For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+
+## Changelog
+
+__0.1.0__
+
+- Initial release
+
+## License
+
+Copyright (c) 2018
+
+Licensed under the [MIT license](LICENSE).
