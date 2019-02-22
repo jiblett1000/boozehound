@@ -5,28 +5,20 @@
       :context-menu="contextMenu"/>
     <v-flex>
       <v-list>
-        <template v-for="(recipe, index) in recipesFilteredList">
+        <template v-for="(drink, index) in drinksFilteredList">
 
           <v-list-tile
-            :key="recipe.name"
-            to="/recipes/:id"
+            :key="index"
+            to="/drinks/:id"
             avatar>
-
+            
             <v-list-tile-avatar>
-              <img :src="recipe.image">
+              <img :src="drink.image">
             </v-list-tile-avatar>
-
+            
             <v-list-tile-content>
-              <v-list-tile-title v-html="recipe.name"/>
+              <v-list-tile-title v-html="drink.name"/>
             </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-btn 
-                icon 
-                ripple>
-                <v-icon color="grey lighten-1">more_vert</v-icon>
-              </v-btn>
-            </v-list-tile-action>
           </v-list-tile>
 
           <v-divider :key="index"/>
@@ -51,7 +43,6 @@
 <script>
 import { mapState } from 'vuex';
 import TheToolbar from '@/components/TheToolbar';
-import recipesTemp from '@/assets/drinks';
 
 export default {
   components: {
@@ -60,8 +51,7 @@ export default {
 
   data () {
     return {
-      recipesTemp,
-      title: 'Recipes',
+      title: 'Drinks',
       contextMenu: [
         { title: 'Sort', icon: 'sort' },
         { title: 'Filter', icon: 'filter_list' },
@@ -70,11 +60,6 @@ export default {
       ],
     }
   },
-
-  fetch ({store}) {
-    store.dispatch('recipes/setList');
-  },
-
   head () {
     return {
       title: this.title,
@@ -84,7 +69,7 @@ export default {
   
   computed: {
     ...mapState({
-      recipesList: state => state.recipes.list,
+      drinksList: state => state.drinks.list,
     }),
 
     navSearch: {
@@ -96,9 +81,9 @@ export default {
       },
     },
 
-    recipesFilteredList() {
-      return this.recipesTemp.filter(recipe => {
-        return recipe.name.toLowerCase().includes((this.navSearch ? this.navSearch : '').toLowerCase())
+    drinksFilteredList() {
+      return this.drinksList.filter(drink => {
+        return drink.name.toLowerCase().includes((this.navSearch ? this.navSearch : '').toLowerCase())
       })
     },
   },

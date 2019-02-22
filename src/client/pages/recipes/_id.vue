@@ -6,6 +6,14 @@
     <v-flex>
       <v-container>
         <v-form>
+          <v-layout>
+            <v-flex md5>
+              <v-img
+                src="https://www.saveur.com/sites/saveur.com/files/styles/1000_1x_/public/copper-king-6_2000x1500.jpg?itok=vMhh96oB&fc=50,50"
+                aspect-ratio="1"
+                class="grey lighten-2"/>
+            </v-flex>
+          </v-layout>
           <v-text-field
             v-model="recipeName"
             label="Name"
@@ -15,49 +23,48 @@
             box/>
           <v-subheader>Ingredients</v-subheader>
           <v-container class="pa-0">
-            <v-input
+            <v-card
               v-for="ingredient in recipe.ingredients"
               :key="ingredient.name"
-              append-icon="close"
-              prepend-icon="drag_handle"
-              class="input-list"
-              box
-            >
-              <v-layout
-                row
-                wrap>
-                <v-flex 
-                  xs2
-                  d-inline-flex>
-                  <v-text-field 
-                    label="Amount"
-                    type="number"
-                    class="inputNumber"
-                    single-line
-                  />
-                </v-flex>
+              elevation="1"
+              class="mb-2 px-3">
+              <v-input
+                append-icon="close"
+                class="input-list ma-0 pa-0" >
+                <v-layout row>
+                  <v-flex 
+                    xs2>
+                    <v-text-field 
+                      label="Amount"
+                      type="number"
+                      single-line
+                      class="inputNumber ma-0 pa-0"
+                    />
+                  </v-flex>
 
-                <v-flex 
-                  xs2
-                  d-inline-flex>
-                  <v-select 
-                    :items="ingredientUnits"
-                    label="Unit"
-                    single-line 
-                  />
-                </v-flex>
+                  <v-flex 
+                    xs2>
+                    <v-select 
+                      :items="ingredientUnits"
+                      single-line
+                      label="Unit"
+                      class="ma-0 pa-0"
+                    />
+                  </v-flex>
 
-                <v-flex
-                  xs8
-                  d-inline-flex>
-                  <v-text-field 
-                    label="Ingredient"
-                    single-line>
-                    {{ ingredient.name }}
-                  </v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-input>
+                  <v-flex
+                    xs8
+                    d-inline-flex>
+                    <v-autocomplete
+                      :items="components"
+                      clearable
+                      item-text="name"
+                      label="Component"
+                      class="ma-0 pa-0"/>
+                  </v-flex>
+                </v-layout>
+              </v-input>
+            </v-card>
             <v-layout>
               <v-flex>
                 <v-btn
@@ -76,7 +83,8 @@
             v-model="recipePrepMethods"
             :items="prepMethods"
             label="Prep Methods"
-            box
+            solo
+            elevation=""
             multiple
             clearable
           />
@@ -224,6 +232,7 @@ export default {
       volumeDisplayUnits: state => state.user.settings.volumeDisplayUnits,
       drinkwareList: state => state.drinkware.list,
       recipe: state => state.recipes.currentRecipe,
+      components: state => state.components.list,
     }),
 
     recipeName: {

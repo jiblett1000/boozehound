@@ -1,5 +1,6 @@
 <template> 
   <v-navigation-drawer
+    id="TheDrawer"
     v-model="drawer"
     fixed
     app>
@@ -31,10 +32,32 @@
 
       <template v-for="(item, i) in TheMenu">
 
-        <v-divider
-          v-if="item.divider"
-          :key="i"
-          class="my-3" />
+        <v-list-group
+          v-if="item.menu"
+          :prepend-icon="item.icon"
+          :key="i">
+
+          <v-list-tile 
+            slot="activator">
+            <v-list-tile-title>Recipes</v-list-tile-title>
+          </v-list-tile>
+  
+          <template v-for="(item, i) in item.menu">
+            <v-list-tile
+              :to="item.href"
+              :key="i"
+              router
+              exact>
+              <v-list-tile-action>
+                <v-icon v-html="item.icon" />
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title v-text="item.title" />
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+    
+        </v-list-group>
 
         <v-list-tile
           v-else
@@ -70,6 +93,24 @@ export default {
           href: '/recipes', 
           title: 'Recipes', 
           icon: 'book', 
+          menu: [
+            {
+              href: '/recipes/drinks',
+              title: 'Drinks',
+            },
+            {
+              href: '/recipes/components',
+              title: 'Components',
+            },
+            {
+              href: '/recipes/drinkware',
+              title: 'Drinkware',
+            },
+            {
+              href: '/recipes/garnishes',
+              title: 'Garnishes'
+            }
+          ]
         },
         { 
           href: '/inventory', 
@@ -91,8 +132,8 @@ export default {
           title: 'Reports', 
           icon: 'trending_up', 
         },
-        { 
-          divider: true,
+        {
+
         },
         { 
           href: '/settings',
@@ -126,4 +167,8 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+
+</style>
 

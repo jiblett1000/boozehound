@@ -1,7 +1,10 @@
+import drinks from '../assets/drinks';
+const list = drinks;
 export const state = () => ({
-  list: [],
-  currentRecipe: {
-    name: 'Blah',
+  list,
+
+  currentDrink: {
+    name: 'Old Fashioned',
     ingredients: [
      {
         name: 'Rye Whiskey',
@@ -30,8 +33,10 @@ export const state = () => ({
     ],
     prepMethods: [],
     drinkware: null,
-    served: [],
-    garnishes: [],
+    served: '',
+    garnishes: [
+      'Lemon Peel',
+    ],
     initialVol: null,
     initialAbv: null,
     dilution: null,
@@ -42,10 +47,6 @@ export const state = () => ({
 });
 
 export const mutations = {
-  SET_LIST (state, data) {
-    state.list = data;
-  },
-  
   SET_NAME (state, data) {
     state.currentRecipe.name = data;
   },
@@ -64,11 +65,6 @@ export const mutations = {
 };
 
 export const actions = {
-  async setList ({commit}) {
-    const recipes = await this.$axios.$get('/api/recipes')
-    commit('SET_LIST', recipes)
-  },
-
   setName ({commit}, data) {
     commit('SET_NAME', data);
   },

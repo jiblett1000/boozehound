@@ -14,6 +14,12 @@ const _10d729a4 = () => interopDefault(import('../src/client/pages/recipes/index
 const _ce1abdd2 = () => interopDefault(import('../src/client/pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _9fa4b00a = () => interopDefault(import('../src/client/pages/reports.vue' /* webpackChunkName: "pages/reports" */))
 const _1e966e97 = () => interopDefault(import('../src/client/pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _152e0fbc = () => interopDefault(import('../src/client/pages/recipes/drinks/index.vue' /* webpackChunkName: "pages/recipes/drinks/index" */))
+const _c7a292ac = () => interopDefault(import('../src/client/pages/recipes/drinkware/index.vue' /* webpackChunkName: "pages/recipes/drinkware/index" */))
+const _4f4b8daa = () => interopDefault(import('../src/client/pages/recipes/garnishes/index.vue' /* webpackChunkName: "pages/recipes/garnishes/index" */))
+const _41965db8 = () => interopDefault(import('../src/client/pages/recipes/drinks/_id.vue' /* webpackChunkName: "pages/recipes/drinks/_id" */))
+const _4e6e5b92 = () => interopDefault(import('../src/client/pages/recipes/drinkware/_id.vue' /* webpackChunkName: "pages/recipes/drinkware/_id" */))
+const _38ea8a53 = () => interopDefault(import('../src/client/pages/recipes/garnishes/_id.vue' /* webpackChunkName: "pages/recipes/garnishes/_id" */))
 const _2ff0a1c3 = () => interopDefault(import('../src/client/pages/inventory/_id.vue' /* webpackChunkName: "pages/inventory/_id" */))
 const _37a18484 = () => interopDefault(import('../src/client/pages/orders/_id.vue' /* webpackChunkName: "pages/orders/_id" */))
 const _17894c6e = () => interopDefault(import('../src/client/pages/pos-items/_id.vue' /* webpackChunkName: "pages/pos-items/_id" */))
@@ -128,6 +134,30 @@ export function createRouter() {
       path: "/settings",
       component: _1e966e97,
       name: "settings"
+    }, {
+      path: "/recipes/drinks",
+      component: _152e0fbc,
+      name: "recipes-drinks"
+    }, {
+      path: "/recipes/drinkware",
+      component: _c7a292ac,
+      name: "recipes-drinkware"
+    }, {
+      path: "/recipes/garnishes",
+      component: _4f4b8daa,
+      name: "recipes-garnishes"
+    }, {
+      path: "/recipes/drinks/:id",
+      component: _41965db8,
+      name: "recipes-drinks-id"
+    }, {
+      path: "/recipes/drinkware/:id",
+      component: _4e6e5b92,
+      name: "recipes-drinkware-id"
+    }, {
+      path: "/recipes/garnishes/:id",
+      component: _38ea8a53,
+      name: "recipes-garnishes-id"
     }, {
       path: "/inventory/:id",
       component: _2ff0a1c3,
